@@ -7,7 +7,7 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
-  @Roles(Role.Admin)
+  @Roles(Role.User)
   @Get()
   async findAll(@Request() req) {
     console.log(req.user);
