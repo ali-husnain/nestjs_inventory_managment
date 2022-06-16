@@ -11,16 +11,20 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findOne(username);
-    if (user && (await bcrypt.compare(pass, user.password))) {
+  async validateUser(email: string, password: string): Promise<any> {
+    const user = await this.usersService.findOne(email);
+    if (user && (await bcrypt.compare(password, user.password))) {
       return this.sanitizedUser(user);
     }
     return null;
   }
 
   async login(user: any) {
-    const payload = { username: user.username, sub: user.userId };
+    const payload = {
+      username: user.email,
+      userId: user._id,
+      roles: user.roles,
+    };
     return {
       ...user,
       access_token: this.jwtService.sign(payload),
@@ -33,6 +37,11 @@ export class AuthService {
   }
 
   sanitizedUser(user: any) {
-    return { email: user.email, name: user.name, _id: user._id };
+    return {
+      email: user.email,
+      name: user.name,
+      _id: user._id,
+      roles: user.roles,
+    };
   }
 }

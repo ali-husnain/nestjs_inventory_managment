@@ -3,6 +3,7 @@ import { Document } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { saltRound } from 'src/auth/constants';
 import { Field, ObjectType } from '@nestjs/graphql';
+import { Role } from '../../auth/enums/role.enum';
 
 export type UserDocument = User & Document;
 @ObjectType()
@@ -24,6 +25,9 @@ export class User {
 
   @Prop({ required: true })
   password: string;
+
+  @Prop({ default: Role.User })
+  roles: Role[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
