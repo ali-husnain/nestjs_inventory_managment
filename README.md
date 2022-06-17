@@ -1,6 +1,6 @@
 ## Description
 
-This is very simple inventory mangement with categories relation app. App also have user authentication and role base authorization.
+This is very simple app of inventory mangement with categories relation. App also have user authentication and role base authorization.
 
 I have also attached the postman colleciton with my working url of heroku app, If you want to run this on local please change the url with that `http://localhost:4000`.
 
