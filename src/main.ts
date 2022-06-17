@@ -9,7 +9,7 @@ async function bootstrap() {
   //change respone according to needs
   app.useGlobalInterceptors(new RequestResponseTransformInterceptor());
 
-  await app.listen(env.PORT);
+  await app.listen(env.PORT || 3000);
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
