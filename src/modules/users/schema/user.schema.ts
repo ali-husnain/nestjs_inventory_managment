@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { saltRound } from 'src/auth/constants';
-import { Role } from '../../auth/enums/role.enum';
+import { Role } from '../../../auth/enums/role.enum';
 
 export type UserDocument = User & Document;
 @Schema()

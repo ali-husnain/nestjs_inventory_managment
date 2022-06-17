@@ -17,7 +17,7 @@ $ npm install
 ## Create .env file at root
 
 ```bash
-PORT=3001
+PORT=4000
 MONGO_URI=
 ```
 

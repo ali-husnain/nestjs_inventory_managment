@@ -11,8 +11,8 @@ import {
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
-import { CreateUserDTO } from './../users/dto/create-user.dto';
-import { UsersService } from './../users/users.service';
+import { CreateUserDTO } from '../modules/users/dto/create-user.dto';
+import { UsersService } from '../modules/users/users.service';
 import { Public } from './decorators/public.auth.decorator';
 
 @Controller('auth')
