@@ -1,12 +1,30 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This is very simple inventory mangement with categories relation app. App also have user authentication and role base authorization.
+
+I have also attached the postman colleciton with my working url of heroku app, If you want to run this on local please change the url with that `http://localhost:4000`.
+
+### User Module
+```
+a. Authentication
+b. Authorization
+    i. User Roles
+    ii. Permissions (based on this permission a user can access further APIs)
+```
+
+### Product Module
+```
+a. Base Schema
+b. Dynamic Attribute Schema (The attribute should be dynamic schema it can be extendable at any time 
+for any kind of product, and product can be anything, like electronic items, 
+foods items, properties, services.)
+```
+
+### Categories Module
+```
+a. Base Categories
+b. Multi-Level Categories (Multi Nested Categories)
+```
 
 ## Installation
 
@@ -18,7 +36,7 @@ $ npm install
 
 ```bash
 PORT=4000
-MONGO_URI=
+MONGO_URI= set your mongodb url here.
 ```
 
 ## Running the app
@@ -28,3 +46,11 @@ MONGO_URI=
 $ npm run start
 ```
 
+### `Screenshots`
+
+See screenshots of postman working below.
+
+
+![ScreenShot](/screenshots/Login-screen.png)
+
+![ScreenShot](/screenshots/User%20Listing.png)

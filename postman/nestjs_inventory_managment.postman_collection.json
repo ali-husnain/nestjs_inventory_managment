@@ -1,0 +1,371 @@
+{
+	"info": {
+		"_postman_id": "c71d68a7-7a1c-4dfe-ad73-820e426390ca",
+		"name": "nestjs_inventory_managment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"nestjs_inventory_management_token\", \"Bearer \"+pm.response.json().data.access_token)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"husnain11@gmail.com\", \r\n    \"password\": \"changeme1\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "https://myinventorymangement.herokuapp.com/auth/login",
+					"protocol": "https",
+					"host": [
+						"myinventorymangement",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register New User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"husnain11@gmail.com\", \r\n    \"password\": \"changeme1\",\r\n    \"name\": \"ali\",\r\n    \"roles\": \"admin\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "https://myinventorymangement.herokuapp.com/auth/register",
+					"protocol": "https",
+					"host": [
+						"myinventorymangement",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Users List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{nestjs_inventory_management_token}}"
+					}
+				],
+				"url": {
+					"raw": "https://myinventorymangement.herokuapp.com/users",
+					"protocol": "https",
+					"host": [
+						"myinventorymangement",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add New Product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{nestjs_inventory_management_token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sku\": \"3453FDGDFG4\",\r\n  \"type\": 1,\r\n  \"title\": \"Cycle Item\",\r\n  \"description\": \"testing\",\r\n  \"category\": \"62ab679eaf90fc899efe7898\",\r\n  \"sub_category\": \"62ab67beaf90fc899efe789a\",\r\n  \"shipping\": {\r\n    \"weight\": 6,\r\n    \"dimensions\": {\r\n      \"width\": 10,\r\n      \"height\": 10,\r\n      \"depth\": 1\r\n    }\r\n  },\r\n  \"pricing\": {\r\n    \"retail\": 1100,\r\n    \"cost\": 500\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://myinventorymangement.herokuapp.com/product",
+					"protocol": "https",
+					"host": [
+						"myinventorymangement",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Products List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{nestjs_inventory_management_token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://myinventorymangement.herokuapp.com/product",
+					"protocol": "https",
+					"host": [
+						"myinventorymangement",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product Detail By Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{nestjs_inventory_management_token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://myinventorymangement.herokuapp.com/product/62ab79c437cd5f659873959b",
+					"protocol": "https",
+					"host": [
+						"myinventorymangement",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"product",
+						"62ab79c437cd5f659873959b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{nestjs_inventory_management_token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://myinventorymangement.herokuapp.com/product/62ab18e71a64b9a7af8e8faa",
+					"protocol": "https",
+					"host": [
+						"myinventorymangement",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"product",
+						"62ab18e71a64b9a7af8e8faa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category Detail By Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{nestjs_inventory_management_token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://myinventorymangement.herokuapp.com/category/62ab1deb4785dea03f9926de",
+					"protocol": "https",
+					"host": [
+						"myinventorymangement",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"category",
+						"62ab1deb4785dea03f9926de"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Category By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{nestjs_inventory_management_token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://myinventorymangement.herokuapp.com/category/62ab67dbaf90fc899efe789c",
+					"protocol": "https",
+					"host": [
+						"myinventorymangement",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"category",
+						"62ab67dbaf90fc899efe789c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add New Category",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{nestjs_inventory_management_token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Car\",\r\n    \"is_parent\": \"62ab679eaf90fc899efe7898\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://myinventorymangement.herokuapp.com/category",
+					"protocol": "https",
+					"host": [
+						"myinventorymangement",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Categories With SubChilds",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{nestjs_inventory_management_token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://myinventorymangement.herokuapp.com/category",
+					"protocol": "https",
+					"host": [
+						"myinventorymangement",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{nestjs_inventory_management_token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://myinventorymangement.herokuapp.com/users/62989131c875bd2c1c888c72",
+					"protocol": "https",
+					"host": [
+						"myinventorymangement",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"62989131c875bd2c1c888c72"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
