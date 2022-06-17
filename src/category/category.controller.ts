@@ -1,4 +1,6 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { Role } from 'src/auth/enums/role.enum';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 
@@ -6,6 +8,7 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
+  @Roles(Role.Admin)
   @Post()
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoryService.create(createCategoryDto);
@@ -24,6 +27,7 @@ export class CategoryController {
     return this.categoryService.findOne(id);
   }
 
+  @Roles(Role.Admin)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.categoryService.remove(id);

@@ -1,4 +1,4 @@
-import { Controller, Get, Request } from '@nestjs/common';
+import { Controller, Delete, Get, Param } from '@nestjs/common';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
 import { UsersService } from './users.service';
@@ -7,10 +7,14 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
-  @Roles(Role.User)
   @Get()
-  async findAll(@Request() req) {
-    console.log(req.user);
+  async findAll() {
     return await this.userService.findAll();
+  }
+
+  @Roles(Role.Admin)
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.userService.remove(id);
   }
 }

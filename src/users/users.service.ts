@@ -19,4 +19,8 @@ export class UsersService {
   async findAll(): Promise<User[]> {
     return this.userModel.find({}, { name: 1, email: 1, roles: 1 });
   }
+
+  async remove(id: string) {
+    return this.userModel.deleteOne({ _id: id });
+  }
 }

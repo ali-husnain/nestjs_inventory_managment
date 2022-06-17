@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model } from 'mongoose';
-import { CategorySchema } from 'src/category/schema/category.schema';
 import { CreateProductDto } from './dto/create-product.dto';
 import { Product, ProductDocument } from './schema/product.schema';
 
@@ -12,11 +11,11 @@ export class ProductService {
   ) {}
 
   async create(createProductDto: CreateProductDto): Promise<Product> {
-    return this.productModel.create(createProductDto);
+    const created = await this.productModel.create(createProductDto);
+    return this.findOne(created._id);
   }
 
   async findOne(id: string): Promise<Product | undefined> {
-    //return this.productModel.findById(id, { __v: 0 });
     const matchProduct = await this.productModel.aggregate([
       {
         $match: {
@@ -29,6 +28,21 @@ export class ProductService {
           localField: 'category',
           foreignField: '_id',
           as: 'category',
+          pipeline: [{ $project: { _id: 1, name: 1 } }],
+        },
+      },
+      {
+        $lookup: {
+          from: 'categories',
+          localField: 'sub_category',
+          foreignField: '_id',
+          as: 'sub_category',
+          pipeline: [{ $project: { _id: 1, name: 1 } }],
+        },
+      },
+      {
+        $project: {
+          __v: 0,
         },
       },
     ]);
@@ -43,6 +57,21 @@ export class ProductService {
           localField: 'category',
           foreignField: '_id',
           as: 'category',
+          pipeline: [{ $project: { _id: 1, name: 1 } }],
+        },
+      },
+      {
+        $lookup: {
+          from: 'categories',
+          localField: 'sub_category',
+          foreignField: '_id',
+          as: 'sub_category',
+          pipeline: [{ $project: { _id: 1, name: 1 } }],
+        },
+      },
+      {
+        $project: {
+          __v: 0,
         },
       },
     ]);
